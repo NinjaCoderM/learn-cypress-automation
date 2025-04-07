@@ -9,6 +9,6 @@ describe('Meine Test-Suite', () => {
     });
 
     it('sollte etwas testen', () => {
-        // eigentlicher Testcode
+        cy.visit('https://rahulshettyacademy.com/seleniumPractise/#/')
     });
 });
