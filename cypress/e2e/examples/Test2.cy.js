@@ -15,5 +15,7 @@ describe('Meine Test-Suite', () => {
         cy.get('.product').should('have.length', 5)
         cy.get('.products .product').should('have.length', 4)
         cy.get('.product:visible').should('have.length', 4) //:visible nur in cypress
+        cy.get('.products').find('.product').should('have.length', 4)
+        
     });
 });
