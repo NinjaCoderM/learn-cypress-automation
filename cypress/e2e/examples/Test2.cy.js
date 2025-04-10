@@ -17,6 +17,8 @@ describe("Meine Test-Suite", () => {
     cy.get(".product:visible").should("have.length", 4); //:visible nur in cypress
     cy.get(".products").find(".product").should("have.length", 4);
     //cy.get('div.products div.product:nth-of-type(2) div button').click()
-    cy.get(".products").find(".product").eq(2).contains("ADD TO CART").click();
+    //cy.get(".products").find(".product").eq(2).contains("ADD TO CART").click(); // Besser weil Zwischenergebnisse
+    cy.get(".products").find(".product").contains("Capsicum").parent().contains("ADD TO CART").click();               
+    
   });
 });
