@@ -40,5 +40,13 @@ describe("Meine Test-Suite", () => {
     cy.get('.brand').then(($el) => {
         assert.equal($el.text(), "GREENKART");
     });
+    cy.get('.cart-icon').click();
+    cy.get('.cart-preview > .action-block > button').click()
+    cy.get('[style="text-align: right; width: 100%; margin-top: 20px; margin-right: 10px;"] > :nth-child(14)')
+    cy.get('button').each($el => {
+        if($el.text() === "Place Order") {
+            cy.wrap($el).click()
+        }
+    })
   });
 });
