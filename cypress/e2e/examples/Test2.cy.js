@@ -30,7 +30,7 @@ describe("Meine Test-Suite", () => {
       const text = $el.text();
       cy.log(text);
     });
-    
+    cy.get('.brand').should("have.text", "GREENKART")
       
   });
 });
