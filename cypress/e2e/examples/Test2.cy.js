@@ -23,7 +23,11 @@ describe("Meine Test-Suite", () => {
         if ($el.text().includes("Capsicum")) {
           cy.wrap($el).contains("ADD TO CART").click();
         }
-      });          
-    
+      });       
+    cy.get('.brand').then(($el) => {
+      const text = $el.text();
+      cy.log(text);
+    });
+      
   });
 });
