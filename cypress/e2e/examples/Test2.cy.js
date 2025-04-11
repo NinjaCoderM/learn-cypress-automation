@@ -30,7 +30,15 @@ describe("Meine Test-Suite", () => {
       const text = $el.text();
       cy.log(text);
     });
+    //kurz
     cy.get('.brand').should("have.text", "GREENKART")
-      
+    //auch aber lange form
+    cy.get('.brand').then(($el) => {
+        expect($el.text()).to.equal("GREENKART");
+    });  
+    //assert chai
+    cy.get('.brand').then(($el) => {
+        assert.equal($el.text(), "GREENKART");
+    });
   });
 });
