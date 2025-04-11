@@ -10,6 +10,6 @@ describe("Meine Test-Suite", () => {
   
     it("sollte etwas testen", () => {
       cy.visit("https://rahulshettyacademy.com/AutomationPractice/");
-      cy.get('#checkBoxOption1').check().should('be.checked')
+      cy.get('#checkBoxOption1').check().should('be.checked').and('have.value', 'option1')
     });
 });
