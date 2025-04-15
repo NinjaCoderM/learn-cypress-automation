@@ -19,6 +19,13 @@ describe("Meine Test-Suite", () => {
       cy.get("#autocomplete").type("ind")
       cy.get(".ui-menu li").filter((index, el) => (el.textContent?.trim() ?? "") === "India").click()
       cy.get("#autocomplete").should("have.value", "India")
+
+      cy.get("#displayed-text").should('be.visible')
+      cy.get("#hide-textbox").click()
+      cy.get("#displayed-text").should('not.be.visible')
+      cy.get("#show-textbox").click()
+      cy.get("#displayed-text").should('be.visible')
+
     });
 
 
