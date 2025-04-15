@@ -13,5 +13,10 @@ describe("Meine Test-Suite", () => {
       cy.get('#checkBoxOption1').check().should('be.checked').and('have.value', 'option1')
       cy.get('#checkBoxOption1').uncheck().should('not.be.checked')
       cy.get('#checkbox-example input[type="checkbox"]') /*.check() für alle */ .check(['option2', 'option3'])
+
+      cy.get('#dropdown-class-example').select("Option2");
+    
     });
+
+
 });
