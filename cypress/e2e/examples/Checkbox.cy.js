@@ -26,6 +26,9 @@ describe("Meine Test-Suite", () => {
       cy.get("#show-textbox").click()
       cy.get("#displayed-text").should('be.visible')
 
+      cy.get("#radio-btn-example").contains('label', 'Radio2').find("input").check();
+      cy.get('input[value="radio2"]').should('be.checked');
+
     });
 
 
