@@ -14,11 +14,11 @@ describe("Meine Test-Suite", () => {
       cy.get('#checkBoxOption1').uncheck().should('not.be.checked')
       cy.get('#checkbox-example input[type="checkbox"]') /*.check() für alle */ .check(['option2', 'option3'])
 
-      cy.get('#dropdown-class-example').select("Option2");
+      cy.get('#dropdown-class-example').select("option2").should('have.value', 'option2')
 
       cy.get("#autocomplete").type("ind")
       cy.get(".ui-menu li").filter((index, el) => (el.textContent?.trim() ?? "") === "India").click()
-    
+      cy.get("#autocomplete").should("have.value", "India")
     });
 
 
