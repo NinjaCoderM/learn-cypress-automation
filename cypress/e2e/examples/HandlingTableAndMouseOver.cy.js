@@ -21,4 +21,9 @@ describe("Handling Table and MouseOver", () => {
         cy.contains('Top').should('be.visible');
         cy.contains('Top').click({ force: true });
     });
+    it("Equals String", () => {
+        expect('str1').equal('str1')//erlaubt
+        expect('str1').to.equal('str1')//Richtige Variante
+        expect('str1').to.equals('str1')//typischer Fehler und inzwischen auch erlaubt
+    });
 });
