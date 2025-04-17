@@ -16,6 +16,9 @@ describe("Handling Table and MouseOver", () => {
     });
     it("Test MouseOver", () => {
         cy.visit("https://rahulshettyacademy.com/AutomationPractice/");
-        
+        // falsch weil invoke show betrifft nicht den Button cy.get('#mousehover').invoke('show');
+        cy.get('div.mouse-hover-content').invoke('show')
+        cy.contains('Top').should('be.visible');
+        cy.contains('Top').click({ force: true });
     });
 });
