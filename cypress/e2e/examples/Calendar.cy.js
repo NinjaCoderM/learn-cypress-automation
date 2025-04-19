@@ -5,10 +5,11 @@ describe("Calendar Test-Suite", () => {
         Date.now
 
         cy.visit("https://rahulshettyacademy.com/seleniumPractise/#/")
-        cy.get("a.cart-header-navlink")
-           .filter((index, $el)=>$el.innerText?.trim()==='Top Deals')
-           .invoke('removeAttr', 'target')
-           .click()
+        //cy.get("a.cart-header-navlink")
+        //   .filter((index, $el)=>$el.innerText?.trim()==='Top Deals')
+        //   .invoke('removeAttr', 'target')
+        //   .click()
+        cy.contains("a", "Top Deals").invoke('removeAttr', 'target').click()
         cy.get("input.react-date-picker__inputGroup__day").click()
         cy.get("button.react-calendar__navigation__label").click()
         cy.get("button.react-calendar__navigation__label").click()
