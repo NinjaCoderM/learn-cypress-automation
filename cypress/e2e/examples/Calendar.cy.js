@@ -2,7 +2,7 @@
 describe("Calendar Test-Suite", () => {
     it("Testen des Calendars", () => {
         const yearPlus2 = (new Date().getFullYear() + 2).toString();
-        
+
         cy.visit("https://rahulshettyacademy.com/seleniumPractise/#/")
         //cy.get("a.cart-header-navlink")
         //   .filter((index, $el)=>$el.innerText?.trim()==='Top Deals')
@@ -17,5 +17,12 @@ describe("Calendar Test-Suite", () => {
         cy.get("button").contains("23").click()
 
         cy.get("input[name='date']").should('have.value', yearPlus2+"-07-23")
+        cy.get(".react-date-picker__inputGroup__input").each(($el, index)=>{
+            if ($el.attr('name') === 'year') {
+              cy.wrap($el)
+              .invoke('val')
+              .should("eq", yearPlus2)
+            }
+        })
     });
 });
