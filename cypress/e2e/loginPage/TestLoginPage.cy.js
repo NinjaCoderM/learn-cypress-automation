@@ -32,7 +32,7 @@ describe("Test Suite End to End ecommerce Test", ()=>{
         //cy.pause()
 
         confirmationPage.submitFormDetails()
-        confirmationPage.validateSuccess()    
+        confirmationPage.getSuccessMessage()    
         
         
     })

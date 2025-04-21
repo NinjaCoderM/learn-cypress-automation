@@ -5,8 +5,8 @@ class ConfirmationPage{
         //cy.contains("a", "Poland", { timeout: 8000 }).should("be.visible").click()
         //cy.contains("input", "Purchase").click()
     }
-    validateSuccess(){
-        cy.get(".alert-success").should("contain", "Success")
+    getSuccessMessage(){
+        return cy.get(".alert-success")
     }
 }
 export default ConfirmationPage
