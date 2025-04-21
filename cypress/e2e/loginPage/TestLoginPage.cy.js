@@ -15,7 +15,7 @@ describe("Test Suite End to End ecommerce Test", ()=>{
         Cypress.config('defaultCommandTimeout', 10000)
 
         const loginPage = new LoginPage(); 
-        loginPage.visit("https://rahulshettyacademy.com/loginpagePractise/#")
+        loginPage.visit(Cypress.env("url") + "/loginpagePractise/#")
         cy.log(`Username: ${fdata.username}`)
         const productPage = loginPage.login(fdata.username, fdata.password)
 
