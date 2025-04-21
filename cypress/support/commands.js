@@ -23,3 +23,8 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.Commands.add('submitFormDetails', ()=>{
+    cy.get("#country").type("Po")
+    cy.contains("a", "Poland", { timeout: 8000 }).should("be.visible").click()
+    cy.get('input[value="Purchase"]').click()
+})
