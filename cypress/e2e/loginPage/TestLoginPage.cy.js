@@ -1,22 +1,31 @@
 /// <reference types="cypress" />
 describe("Test Suite End to End ecommerce Test", ()=>{
+    let fdata;
+    before(()=>{
+        cy.fixture('example').then((data)=>{
+            fdata = data;
+        })
+    })
+
+
     it("Submit Order", ()=>{
         cy.visit("https://rahulshettyacademy.com/loginpagePractise/#")
-        cy.get('#username').type("rahulshettyacademy") // invoke geht aber ohne Events .invoke("val", "rahulshettyacademy")
-        cy.get('#password').type("learning")
+        cy.get('#username').type(fdata.username ) // invoke geht aber ohne Events .invoke("val", "rahulshettyacademy")
+        cy.get('#password').type(fdata.password)
         cy.contains("input", "Sign In").click()
         cy.contains("Shop Name").should("be.visible")
         cy.get("app-card").should("have.length", 4)
 
         //cy.contains("button", "Add").eq(1).click() -> geht nicht weil immer nur ein Ergebnis. Add müsste eindeutig sein!
-        cy.contains('Nokia Edge')       
+        cy.contains(fdata.productNameNokia)       
             .parents('.card')             
             .find('button.btn-info')      
             .click();   
+
         //cy.get("button:contains('Add')").eq(1).click()
-        cy.get("app-card").filter(":contains('Samsung Note 8')") 
+        cy.get("app-card").filter(`:contains("${fdata.productNameSamsung}")`) 
         .find('button.btn-info')      
-        .click();
+        .click();    
 
         cy.get("app-card").filter(":contains('Blackberry')") 
         .then($el =>{
