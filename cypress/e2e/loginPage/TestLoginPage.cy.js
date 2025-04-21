@@ -16,6 +16,7 @@ describe("Test Suite End to End ecommerce Test", ()=>{
 
         const loginPage = new LoginPage(); 
         loginPage.visit("https://rahulshettyacademy.com/loginpagePractise/#")
+        cy.log(`Username: ${fdata.username}`)
         const productPage = loginPage.login(fdata.username, fdata.password)
 
         productPage.pageValidation()
