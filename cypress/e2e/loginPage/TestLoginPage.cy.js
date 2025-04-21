@@ -25,7 +25,8 @@ describe("Test Suite End to End ecommerce Test", ()=>{
         productPage.addCart(fdata.productNameSamsung)
         const cartPage = productPage.goToCart();
 
-        cartPage.validateMaxSum()
+        cartPage.sumOfProducts().then(sum => expect(sum).to.be.lessThan(250000))
+        
         const confirmationPage = cartPage.checkout()
 
         //cy.pause()
