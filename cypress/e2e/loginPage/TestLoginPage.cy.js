@@ -25,15 +25,13 @@ describe("Test Suite End to End ecommerce Test", ()=>{
         const cartPage = productPage.goToCart();
 
         cartPage.validateMaxSum()
-        cartPage.checkout()
+        const confirmationPage = cartPage.checkout()
 
-        cy.get("#country").type("Po")
+        
 
-        cy.contains("a", "Poland", { timeout: 8000 }).should("be.visible").click()
-
-        cy.contains("input", "Purchase").click()
-
-        cy.get(".alert-success").should("contain", "Success")
+        confirmationPage.submitFormDetails()
+        confirmationPage.validateSuccess()    
+        
         
     })
 })

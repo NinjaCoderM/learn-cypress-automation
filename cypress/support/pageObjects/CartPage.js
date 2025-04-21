@@ -1,3 +1,5 @@
+import ConfirmationPage from "./ConfirmationPage";
+
 class CartPage{
     validateMaxSum(){
         let sum = 0; 
@@ -10,6 +12,7 @@ class CartPage{
     }
     checkout(){
         cy.contains("button", "Checkout").click()
+        return new ConfirmationPage();
     }
 }
 export default CartPage
