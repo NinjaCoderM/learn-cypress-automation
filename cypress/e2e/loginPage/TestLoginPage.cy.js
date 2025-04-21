@@ -22,29 +22,10 @@ describe("Test Suite End to End ecommerce Test", ()=>{
         productPage.cartLimit();
         productPage.addCart(fdata.productNameNokia)
         productPage.addCart(fdata.productNameSamsung)
-        productPage.goToCart();
+        const cartPage = productPage.goToCart();
 
-        cy.get("tr").each($el => {
-            const $row = Cypress.$($el);
-          
-            const col = $row.find(".col-sm-8");
-            if (col.length > 0 && col.is(":visible")) {
-              const priceText = $row.find("td.col-sm-1 strong").first().text();
-              const value = parseInt(priceText.replace(/[^\d]/g, ''));
-              expect(value).to.be.lessThan(200000);
-            }
-        });
-
-        //alternative vom Vortragenden
-        let sum = 0; 
-        cy.get("tr td:nth-child(4) strong").each($el => {
-            const amount = Number($el.text().split(" ")[1].trim()); 
-            sum = sum + amount
-        }).then(()=>{
-            expect(sum).to.be.lessThan(250000) // muss im then sein, da sonst zu früh getestet, nur cy wird in der richtigen Reihenfolge bearbeitet
-        })
-
-        cy.contains("button", "Checkout").click()
+        cartPage.validateMaxSum()
+        cartPage.checkout()
 
         cy.get("#country").type("Po")
 

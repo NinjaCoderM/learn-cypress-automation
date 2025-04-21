@@ -1,3 +1,5 @@
+import CartPage from "./CartPage";
+
 class ProductPage{
     pageValidation(){
         cy.contains("Shop Name").should("be.visible")
@@ -12,6 +14,7 @@ class ProductPage{
     }
     goToCart(){
         cy.get("a:contains('Checkout')").click()
+        return new CartPage(); 
     }
 }
 export default ProductPage; 
