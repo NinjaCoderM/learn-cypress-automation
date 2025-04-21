@@ -27,7 +27,7 @@ describe("Test Suite End to End ecommerce Test", ()=>{
         cartPage.validateMaxSum()
         const confirmationPage = cartPage.checkout()
 
-        
+        //cy.pause()
 
         confirmationPage.submitFormDetails()
         confirmationPage.validateSuccess()    
