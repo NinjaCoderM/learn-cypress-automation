@@ -9,6 +9,7 @@ describe("Test Suite End to End ecommerce Test", ()=>{
 
 
     it("Submit Order", ()=>{
+        Cypress.config('defaultCommandTimeout', 10000)
         cy.visit("https://rahulshettyacademy.com/loginpagePractise/#")
         cy.get('#username').type(fdata.username ) // invoke geht aber ohne Events .invoke("val", "rahulshettyacademy")
         cy.get('#password').type(fdata.password)
@@ -59,7 +60,7 @@ describe("Test Suite End to End ecommerce Test", ()=>{
 
         cy.get("#country").type("Po")
 
-        cy.contains("a", "Poland", { timeout: 10000 }).should("be.visible").click()
+        cy.contains("a", "Poland", { timeout: 8000 }).should("be.visible").click()
 
         cy.contains("input", "Purchase").click()
 
