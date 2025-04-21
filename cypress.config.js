@@ -7,6 +7,9 @@ module.exports = defineConfig({
   env: {
     url: "https://rahulshettyacademy.com",
   },
+  retries: {
+    runMode: 2
+  },
   reporter: "cypress-mochawesome-reporter",
   video: true,
   screenshotsFolder: "cypress/reports/html/screenshots",
