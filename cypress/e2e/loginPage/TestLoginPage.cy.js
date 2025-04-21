@@ -2,7 +2,6 @@
 
 import LoginPage from "../../support/pageObjects/LoginPage";
 
-
 describe("Test Suite End to End ecommerce Test", ()=>{
     let fdata;
     before(()=>{
@@ -17,30 +16,13 @@ describe("Test Suite End to End ecommerce Test", ()=>{
 
         const loginPage = new LoginPage(); 
         loginPage.visit("https://rahulshettyacademy.com/loginpagePractise/#")
-        loginPage.login(fdata.username, fdata.password)
+        const productPage = loginPage.login(fdata.username, fdata.password)
 
-        cy.contains("Shop Name").should("be.visible")
-        cy.get("app-card").should("have.length", 4)
-
-        //cy.contains("button", "Add").eq(1).click() -> geht nicht weil immer nur ein Ergebnis. Add müsste eindeutig sein!
-        cy.contains(fdata.productNameNokia)       
-            .parents('.card')             
-            .find('button.btn-info')      
-            .click();   
-
-        //cy.get("button:contains('Add')").eq(1).click()
-        cy.get("app-card").filter(`:contains("${fdata.productNameSamsung}")`) 
-        .find('button.btn-info')      
-        .click();    
-
-        cy.get("app-card").filter(":contains('Blackberry')") 
-        .then($el =>{
-            cy.wrap($el).should("have.length", 1)
-            cy.wrap($el).contains("button", "Add").click()
-        })
-        
-        
-        cy.get("a:contains('Checkout')").click()
+        productPage.pageValidation()
+        productPage.cartLimit();
+        productPage.addCart(fdata.productNameNokia)
+        productPage.addCart(fdata.productNameSamsung)
+        productPage.goToCart();
 
         cy.get("tr").each($el => {
             const $row = Cypress.$($el);
