@@ -1,4 +1,8 @@
 /// <reference types="cypress" />
+
+import LoginPage from "../../support/pageObjects/LoginPage";
+
+
 describe("Test Suite End to End ecommerce Test", ()=>{
     let fdata;
     before(()=>{
@@ -10,10 +14,11 @@ describe("Test Suite End to End ecommerce Test", ()=>{
 
     it("Submit Order", ()=>{
         Cypress.config('defaultCommandTimeout', 10000)
-        cy.visit("https://rahulshettyacademy.com/loginpagePractise/#")
-        cy.get('#username').type(fdata.username ) // invoke geht aber ohne Events .invoke("val", "rahulshettyacademy")
-        cy.get('#password').type(fdata.password)
-        cy.contains("input", "Sign In").click()
+
+        const loginPage = new LoginPage(); 
+        loginPage.visit("https://rahulshettyacademy.com/loginpagePractise/#")
+        loginPage.login(fdata.username, fdata.password)
+
         cy.contains("Shop Name").should("be.visible")
         cy.get("app-card").should("have.length", 4)
 
@@ -33,6 +38,7 @@ describe("Test Suite End to End ecommerce Test", ()=>{
             cy.wrap($el).should("have.length", 1)
             cy.wrap($el).contains("button", "Add").click()
         })
+        
         
         cy.get("a:contains('Checkout')").click()
 
