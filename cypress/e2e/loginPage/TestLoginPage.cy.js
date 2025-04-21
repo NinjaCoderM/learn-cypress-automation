@@ -20,7 +20,7 @@ describe("Test Suite End to End ecommerce Test", ()=>{
         const productPage = loginPage.login(fdata.username, fdata.password)
 
         productPage.pageValidation()
-        productPage.cartLimit();
+        productPage.getCardCount().should("have.length", 4);
         productPage.addCart(fdata.productNameNokia)
         productPage.addCart(fdata.productNameSamsung)
         const cartPage = productPage.goToCart();
