@@ -16,6 +16,7 @@
   },
   "scripts": {
   "clean": "rimraf cypress/reports/html",
-  "test:loginPage": "npm run clean && npx cypress run --spec cypress/e2e/loginPage/TestLoginPage.cy.js --headed --browser chrome"
+  "test:loginPage": "npm run clean && npx cypress run --spec cypress/e2e/loginPage/TestLoginPage.cy.js --headed --browser chrome",
+  "test": "npx cypress run"
   }
 }
