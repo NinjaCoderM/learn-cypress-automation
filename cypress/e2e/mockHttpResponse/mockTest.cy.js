@@ -13,7 +13,9 @@ describe('MockTest Suite', function(){
             "aisle": "227"
         }]}).as('bookretrievals')
         cy.get('.btn-primary').click()
-        cy.wait('@bookretrievals')
+        cy.wait('@bookretrievals').then(({request, response})=>{
+            cy.get('tr').should('have.length', response?.body.length+1)
+        })
         cy.get('p').should('have.text', 'Oops only 1 Book available')
     })
 })
