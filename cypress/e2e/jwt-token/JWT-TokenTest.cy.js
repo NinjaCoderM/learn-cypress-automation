@@ -17,6 +17,7 @@ describe('JWT Test Suite', function(){
         cy.get('input[placeholder="Select Country"]').type("Ind")
         cy.get('button').contains('India').click()
         cy.contains('Place Order').click()  
-        
+        cy.wait(2000)
+        cy.get('.order-summary button').contains('CSV').click()
     })
 })
