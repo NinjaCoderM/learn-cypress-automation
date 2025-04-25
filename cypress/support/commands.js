@@ -28,3 +28,13 @@ Cypress.Commands.add('submitFormDetails', ()=>{
     cy.contains("a", "Poland", { timeout: 8000 }).should("be.visible").click()
     cy.get('input[value="Purchase"]').click()
 })
+Cypress.Commands.add('LoginAPI', ()=> {
+    cy.request("POST", "https://rahulshettyacademy.com/api/ecom/auth/login", {
+        "userEmail": "test1976@test.com",
+        "userPassword": "Test1Test"
+      }).then(response=>{
+        expect(response.status).to.eq(200)
+        console.log(response.body.token)
+        Cypress.env('token', response.body.token)
+      })
+})
