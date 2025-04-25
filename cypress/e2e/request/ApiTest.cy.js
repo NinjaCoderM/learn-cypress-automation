@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-describe('API Test Suite Fail', function(){
+describe('API Test Suite', function(){
     it('API Post Request Test', () => {
         cy.request('POST', 'http://216.10.245.166/Library/Addbook.php', {
         "name":"Learn Appium Automation with Java",
