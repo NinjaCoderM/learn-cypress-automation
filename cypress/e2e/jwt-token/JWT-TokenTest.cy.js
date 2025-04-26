@@ -13,14 +13,13 @@ describe('JWT Test Suite', function(){
             .parents('.card-body')
             .contains('Add To Cart')
             .click()
-        cy.get('button').contains('Cart').click()
+        cy.get('button').contains('Cart', { timeout: 10000 }).click()
         cy.contains('Checkout').click()    
         cy.get('input[placeholder="Select Country"]').type("Ind")
-        cy.wait(1000)
-        cy.get('button').contains('India').click()
+        cy.get('button').contains('India', { timeout: 10000 }).click()
         cy.contains('Place Order').click()  
         cy.wait(2000)
-        cy.get('.order-summary button').contains('CSV').click()
+        cy.get('.order-summary button', { timeout: 10000 }).contains('CSV').click()
         
         const text = cy.readFile(Cypress.config("fileServerFolder") + "/cypress/downloads/order-invoice_test1976.csv")
         .then(async text=>{
