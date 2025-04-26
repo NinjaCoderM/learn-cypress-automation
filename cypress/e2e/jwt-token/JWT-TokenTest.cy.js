@@ -1,18 +1,25 @@
 /// <reference types="cypress" />
 const neatCSV = require('neat-csv')
+let productName 
 describe('JWT Test Suite', function(){
     it('JWT Login Test', async() => {
         cy.LoginAPI().then(()=>{
             cy.visit("https://rahulshettyacademy.com/client", {
                 onBeforeLoad: function(window){
                     window.localStorage.setItem('token', Cypress.env('token'))
+                    //console.log(Cypress.env('token'))
                 }
             })
         })
-        cy.get('.card-body').contains('ADIDAS ORIGINAL')
+        cy.get(".card-body b").eq(1).then($ele => {
+            productName = $ele.text()
+            console.log('>'+productName)
+            cy.get('.card-body').contains(productName, { timeout: 10000 })
             .parents('.card-body')
             .contains('Add To Cart')
             .click()
+        })
+        
         cy.get('button').contains('Cart', { timeout: 10000 }).click()
         cy.contains('Checkout').click()    
         cy.get('input[placeholder="Select Country"]').type("Ind")
@@ -25,6 +32,8 @@ describe('JWT Test Suite', function(){
         .then(async text=>{
             const csv = await neatCSV(text)
             console.log(csv)
+            const pName = csv[0]['Product Name'] //normalerweise csv[0].ProductName aber wegen space mit []
+            expect(pName, 'should be equal').equal(productName)
         })
 
         
