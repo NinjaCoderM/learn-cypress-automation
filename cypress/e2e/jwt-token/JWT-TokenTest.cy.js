@@ -44,5 +44,9 @@ describe('JWT Test Suite', function(){
             cy.log(result)
             expect(result.data[1].B, 'should be equal').equal(productName)
         });
+
+        cy.readFile(Cypress.config("fileServerFolder") + '/cypress/downloads/order-invoice_test1976.xlsx').then( text => {
+            expect(text, 'should contain').include(productName)
+        })
     })
 })
