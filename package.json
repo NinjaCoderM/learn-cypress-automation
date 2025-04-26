@@ -21,6 +21,7 @@
     "test": "npx cypress run"
   },
   "dependencies": {
+    "convert-excel-to-json": "^1.7.0",
     "pg": "^8.15.6"
   }
 }

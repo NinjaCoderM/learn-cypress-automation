@@ -27,6 +27,7 @@ describe('JWT Test Suite', function(){
         cy.contains('Place Order').click()  
         cy.wait(2000)
         cy.get('.order-summary button', { timeout: 10000 }).contains('CSV').click()
+        cy.get('.order-summary button', { timeout: 10000 }).contains('Excel').click()
         
         const text = cy.readFile(Cypress.config("fileServerFolder") + "/cypress/downloads/order-invoice_test1976.csv")
         .then(async text=>{
@@ -35,6 +36,8 @@ describe('JWT Test Suite', function(){
             const pName = csv[0]['Product Name'] //normalerweise csv[0].ProductName aber wegen space mit []
             expect(pName, 'should be equal').equal(productName)
         })
+
+
 
         
     })
