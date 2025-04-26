@@ -1,12 +1,22 @@
 const { defineConfig } = require("cypress");
 const fs = require("fs");
 const path = require("path");
-const sqlServer = require('cypress-sql-server');
+const { Client } = require('pg'); // PostgreSQL Client
+
+const user = 'cc'        //im Terminal export DB_USER=mein_user         -> process.env.DB_USER;
+const password = 'cc155' //im Terminal export DB_PASSWORD=mein_passwort -> process.env.DB_PASSWORD;
 
 module.exports = defineConfig({
   defaultCommandTimeout: 4000,
   env: {
     url: "https://rahulshettyacademy.com",
+    db: {
+      user: user,
+      host: "localhost",
+      database: "codecrafters_db",
+      password: password,
+      port: 5432
+    }
   },
   retries: {
     runMode: 2
@@ -26,25 +36,26 @@ module.exports = defineConfig({
     videoOnFailOnly: false,
   },
   e2e: {
+    
     setupNodeEvents(on, config) {
-
-      const configdb = {
-          userName: "xxx",
-          password: "xxx",
-          server: "localhost:5432",
-          options: {
-              database: "codecrafters_db",
-              encrypt: true,
-              rowCollectionOnRequestCompletion : true
-          }
-      }
-
-
+      on('task', {
+        queryDb: (query) => {
+          const client = new Client(config.env.db);
+          return client.connect()
+            .then(() => client.query(query))
+            .then(res => {
+              client.end();
+              return res.rows;
+            })
+            .catch(err => {
+              client.end();
+              throw err;
+            });
+        }
+      });
       // 🧹 Automatisch index.html löschen (und optional andere)
       const reportFolder = path.join(__dirname, "cypress/reports/html");
       const indexFile = path.join(reportFolder, "index.html");
-      const tasks = sqlServer.loadDBPlugin(configdb);
-      on('task', tasks);
       // Wenn vorhanden, löschen
       if (fs.existsSync(indexFile)) {
         fs.unlinkSync(indexFile);

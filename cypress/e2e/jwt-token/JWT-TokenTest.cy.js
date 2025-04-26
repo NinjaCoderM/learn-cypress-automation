@@ -2,7 +2,7 @@
 const neatCSV = require('neat-csv')
 let productName 
 describe('JWT Test Suite', function(){
-    it('JWT Login Test', async() => {
+    it('JWT Login Test', () => {
         cy.LoginAPI().then(()=>{
             cy.visit("https://rahulshettyacademy.com/client", {
                 onBeforeLoad: function(window){

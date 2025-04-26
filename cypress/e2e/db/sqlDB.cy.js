@@ -1,8 +1,9 @@
 /// <reference types="cypress" />
-describe('JWT Test Suite', function(){
-    it('JWT Login Test', async() => {
-        cy.sqlServer('select * from Student').then(result=>{
-            console.log(result[0])
-        })
-    })
-})
+describe("Postgres Suite", function () {
+  it("select Abfrage", () => {
+    cy.task("queryDb", "SELECT * FROM student WHERE id = 1").then((result) => {
+      cy.log("Query Result:", result);
+      // Hier kannst du mit den Resultaten weiterarbeiten
+    });
+  });
+});
