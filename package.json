@@ -9,15 +9,16 @@
     "cypress": "^14.2.1",
     "cypress-iframe": "^1.0.1",
     "cypress-mochawesome-reporter": "^3.8.2",
+    "cypress-sql-server": "^1.0.0",
     "mochawesome": "^7.1.3",
     "mochawesome-merge": "^5.0.0",
     "mochawesome-report-generator": "^6.2.0",
-    "rimraf": "^6.0.1",
-    "neat-csv": "5.1.0"
+    "neat-csv": "5.1.0",
+    "rimraf": "^6.0.1"
   },
   "scripts": {
-  "clean": "rimraf cypress/reports/html",
-  "test:loginPage": "npm run clean && npx cypress run --spec cypress/e2e/loginPage/TestLoginPage.cy.js --headed --browser chrome",
-  "test": "npx cypress run"
+    "clean": "rimraf cypress/reports/html",
+    "test:loginPage": "npm run clean && npx cypress run --spec cypress/e2e/loginPage/TestLoginPage.cy.js --headed --browser chrome",
+    "test": "npx cypress run"
   }
 }

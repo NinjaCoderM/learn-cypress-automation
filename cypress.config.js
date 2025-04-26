@@ -1,6 +1,7 @@
 const { defineConfig } = require("cypress");
 const fs = require("fs");
 const path = require("path");
+const sqlServer = require('cypress-sql-server');
 
 module.exports = defineConfig({
   defaultCommandTimeout: 4000,
@@ -26,10 +27,24 @@ module.exports = defineConfig({
   },
   e2e: {
     setupNodeEvents(on, config) {
+
+      const configdb = {
+          userName: "xxx",
+          password: "xxx",
+          server: "localhost:5432",
+          options: {
+              database: "codecrafters_db",
+              encrypt: true,
+              rowCollectionOnRequestCompletion : true
+          }
+      }
+
+
       // 🧹 Automatisch index.html löschen (und optional andere)
       const reportFolder = path.join(__dirname, "cypress/reports/html");
       const indexFile = path.join(reportFolder, "index.html");
-
+      const tasks = sqlServer.loadDBPlugin(configdb);
+      on('task', tasks);
       // Wenn vorhanden, löschen
       if (fs.existsSync(indexFile)) {
         fs.unlinkSync(indexFile);
