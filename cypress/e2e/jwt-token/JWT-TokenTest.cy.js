@@ -41,6 +41,8 @@ describe('JWT Test Suite', function(){
 
         cy.task('readExcelFile', '/cypress/downloads/order-invoice_test1976.xlsx').then((result) => {
             console.log(result);
+            cy.log(result)
+            expect(result.data[1].B, 'should be equal').equal(productName)
         });
     })
 })
