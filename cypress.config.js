@@ -53,6 +53,15 @@ module.exports = defineConfig({
             });
         }
       });
+      on('task', {
+        readExcelFile(filePath) {
+          const excelToJson = require('convert-excel-to-json');
+          const absolutePath = path.join(__dirname, filePath);
+          const fileBuffer = fs.readFileSync(absolutePath);
+          const result = excelToJson({ source: fileBuffer });
+          return result;
+        }
+      });
       // 🧹 Automatisch index.html löschen (und optional andere)
       const reportFolder = path.join(__dirname, "cypress/reports/html");
       const indexFile = path.join(reportFolder, "index.html");

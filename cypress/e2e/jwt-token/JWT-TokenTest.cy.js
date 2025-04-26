@@ -1,5 +1,7 @@
 /// <reference types="cypress" />
 const neatCSV = require('neat-csv')
+const excelToJson = require('convert-excel-to-json');
+const fs = require('fs');
 let productName 
 describe('JWT Test Suite', function(){
     it('JWT Login Test', () => {
@@ -37,8 +39,8 @@ describe('JWT Test Suite', function(){
             expect(pName, 'should be equal').equal(productName)
         })
 
-
-
-        
+        cy.task('readExcelFile', '/cypress/downloads/order-invoice_test1976.xlsx').then((result) => {
+            console.log(result);
+        });
     })
 })
