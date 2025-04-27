@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "convert-excel-to-json": "^1.7.0",
+    "exceljs": "^4.4.0",
     "pg": "^8.15.6"
   }
 }
