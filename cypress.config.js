@@ -2,6 +2,7 @@ const { defineConfig } = require("cypress");
 const fs = require("fs");
 const path = require("path");
 const { Client } = require('pg'); // PostgreSQL Client
+const ExcelJs =require('exceljs');
 
 const user = 'cc'        //im Terminal export DB_USER=mein_user         -> process.env.DB_USER;
 const password = 'cc155' //im Terminal export DB_PASSWORD=mein_passwort -> process.env.DB_PASSWORD;
@@ -62,6 +63,22 @@ module.exports = defineConfig({
           return result;
         }
       });
+      on('task', {
+        async writeExcelTest({searchText,replaceText,change,filePath})//sic ({parm1, param2, ...})
+        {
+            
+          const workbook = new ExcelJs.Workbook();
+          await workbook.xlsx.readFile(filePath);
+          const worksheet = workbook.getWorksheet('Sheet1');
+          const output= await readExcel(worksheet,searchText);
+         
+          const cell = worksheet.getCell(output.row,output.column+change.colChange);
+          cell.value = replaceText;
+          return workbook.xlsx.writeFile(filePath)
+          .then(()=>true)// sic muss etwas zurück geben -> null oder true
+          .catch(()=>false)
+        }
+      })
       // 🧹 Automatisch index.html löschen (und optional andere)
       const reportFolder = path.join(__dirname, "cypress/reports/html");
       const indexFile = path.join(reportFolder, "index.html");
@@ -75,3 +92,22 @@ module.exports = defineConfig({
     specPattern: "cypress/e2e/**/*.cy.js",
   },
 });
+async function readExcel(worksheet,searchText)
+{
+    let output = {row:-1,column:-1};
+    worksheet.eachRow((row,rowNumber) =>
+    {
+          row.eachCell((cell,colNumber) =>
+          {
+              if(cell.value === searchText)
+              {
+                  output.row=rowNumber;
+                  output.column=colNumber;
+              }
+  
+  
+          }  )
+    
+    })
+    return output;
+}
